@@ -1,1 +1,0 @@
-eror_list =[]

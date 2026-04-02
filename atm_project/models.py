@@ -1,8 +1,6 @@
-from eror import eror_list
 from datetime import datetime
-history1 =[]
-history2 =[]
-history3 =[]
+from storage import *
+
 class Account:
     def __init__(self,name,account_id,pin,balance,active,transaction_history,admin_convictions):
         self.name = name
@@ -21,6 +19,11 @@ all_accounts = [account1, account2, account3]
 def enter_pin():
     try:
      pin_input = int(input("enter pin: "))
+     for ac in all_accounts:
+        if pin_input == ac.pin:
+             return True        
+        else:
+             return False
     except:
         now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         error_msg = f"[{now}] ERROR: User entered Letters, not numbers."
