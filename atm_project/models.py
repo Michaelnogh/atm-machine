@@ -26,9 +26,10 @@ def enter_pin():
              return False
     except:
         now = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-        error_msg = f"[{now}] ERROR: User entered Letters, not numbers."
+        error_msg = f"[{now}] ERROR: User entered Letters, not numbers in pin."
         eror_list.append(error_msg)
         
+
 
          
     
