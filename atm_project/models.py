@@ -1,28 +1,64 @@
-# import random
+from datetime import datetime
+import json
 
-# class Bank:
-#     def __init__(self):
-#         self.account = {}
-#         self.admin_pin = "4321"
-
-#     def create_account(self, owner_name, pin, initial_balance = 0):
-#         while True:
-#             acc_num = str(random.randint(10000, 99999))
-#             if acc_num not in self.acoouns:
-#                 break
-
-#         new_account = Account(acc_num, owner_name, pin, initial_balance)
-
-#         self.account[acc_num] = new_account
-#         return acc_num
-    
-#     def get_account(self, account_number):
-#         return self.account.get(account_number)
-    
-#     def authenticate_user(self, acoount_number, pin):
-#         account = self.get_account(account_number)
-        
 
 class Account:
-    def __init__(self,account_id, name,  ):
-        pass       
+    def __init__(self, account_number, name, pin, balance=0, blocked=False, transactions=None):
+        self.account_number = account_number
+        self.name = name
+        self.pin = pin
+        self.balance = balance
+        self.blocked = blocked
+        self.transactions = transactions if transactions else []
+
+    
+    def check_pin(self, pin):
+        return self.pin == pin
+    
+    def add_transaction(self, t_type, ammount, source=None):
+        transaction = {
+            "type": t_type,
+            "ammount": ammount,
+            "source": source,
+            "date": datetime.now().strftime("%Y-%m-%d %H:%M")
+        }
+
+    def deposit(self, amount):
+        if amount <= 0:
+            return False, "Not Vaild"
+        
+        self.balance += amount
+        self.add_transaction("Deposit", amount)
+        return True, "Deposit Succsucfull"
+    
+    def withdraw(self, amount):
+        if amount <= 0:
+            return False, "Number Not Vaild"
+        
+        if amount > self.balance:
+            return False,"Not Enough Balance"
+        
+        self.balance -= amount
+        self.add_transaction("Withdraw", amount)
+
+        return True, "Withdraw Sucsuccfull"
+    
+    def recive_transfer(self, amount, from_account):
+        self.balance += amount
+        self.add_transaction("trasfer_in", amount, from_account)
+
+    def change_pin(self, old_pin, new_pin):
+        if self.pin != old_pin:
+            return False, "Old Pin Incoorect"
+        
+        self.pin = new_pin
+        return True, "Pin Updated Succsucfully"
+    
+
+
+acc = Account(123, "Eli", "1111")
+
+print(acc.deposit(200))
+print(acc.withdraw(50))
+print(acc.change_pin("1111", "2222"))
+
