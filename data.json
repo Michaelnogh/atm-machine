@@ -1,0 +1,46 @@
+{
+    "1001": {
+        "account_number": 1001,
+        "name": "Eli",
+        "pin": "1111",
+        "balance": 500,
+        "blocked": false,
+        "transactions": []
+    },
+    "1002": {
+        "account_number": 1002,
+        "name": "Eli",
+        "pin": "1111",
+        "balance": 350,
+        "blocked": false,
+        "transactions": [
+            {
+                "type": "Withdraw",
+                "amount": 150,
+                "source": null,
+                "date": "2026-04-04 15:07"
+            },
+            {
+                "type": "Transfer Out",
+                "amount": 150,
+                "source": "To Yossi",
+                "date": "2026-04-04 15:07"
+            }
+        ]
+    },
+    "1003": {
+        "account_number": 1003,
+        "name": "Yossi",
+        "pin": "2222",
+        "balance": 250,
+        "blocked": false,
+        "transactions": [
+            {
+                "type": "trasfer_in",
+                "amount": 150,
+                "source": "From Eli (1002",
+                "date": "2026-04-04 15:07"
+            }
+        ]
+    }
+}

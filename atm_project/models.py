@@ -82,7 +82,7 @@ class Account:
 # print(acc.to_dict())
 class Bank:
     def __init__(self):
-        self.account = {} 
+        self.accounts = {} 
         self.data_file = "data.json" # Savind Data inside data.json
         self.admin_password = "admin" # pass for admin
         self.load_data() # First of all load the data from data.json
@@ -105,7 +105,7 @@ class Bank:
                 self.accounts[int(acc_id)] = new_acc_obj # Storing the id in Integer
 
     def create_account(self, name, pin, initial_balance=0):
-        new_id = max(self.account.keys()) +1 if self.accounts else 1001    # ose new id, mathl be 1001 ve mosif 1 kol paam           
+        new_id = max(self.accounts.keys()) +1 if self.accounts else 1001    # ose new id, mathl be 1001 ve mosif 1 kol paam           
         new_acc = Account(new_id, name, pin, initial_balance) # ose new acc im ma she yesh ba sograim
         self.accounts[new_id] = new_acc # shomer et ha new acc 
         self.save_data() # shomer ba disc she lo disaper shom davar
