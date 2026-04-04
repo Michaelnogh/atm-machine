@@ -1,12 +1,5 @@
 import json
 
-<<<<<<< HEAD
-
-eror_list =[]
-history1 =[]
-history2 =[]
-history3 =[]
-=======
 from datetime import *
 import os
 
@@ -25,4 +18,3 @@ def main():
 
 if __name__ == "__main__":
     main()    
->>>>>>> 3b48e5bc2bb5e76f38ab7a7d87857dd929d88a5c
