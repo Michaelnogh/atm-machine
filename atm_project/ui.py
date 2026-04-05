@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from models import Bank, Account
+import time
 
 # --- Init ---
 my_bank = Bank()
@@ -9,17 +10,37 @@ if not my_bank.accounts:
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
 root = ctk.CTk()
-root.title("DevOps Bank System")
-root.geometry("800x900")
+root.title("Hello World Bank - Secure System")
+root.geometry("800x950")
 current_user = None
+
+# --- פונקציית השעון המעודכנת ---
+def update_clock():
+    now = time.strftime("%H:%M:%S  |  %d/%m/%Y")
+    if 'clock_label' in globals():
+        clock_label.configure(text=now)
+    root.after(1000, update_clock)
 
 def change_theme(mode): ctk.set_appearance_mode(mode)
 
 def clear():
     for w in root.winfo_children(): w.destroy()
+    
     f = ctk.CTkFrame(root, fg_color="transparent")
     f.pack(side="top", anchor="ne", padx=10, pady=5)
     ctk.CTkOptionMenu(f, values=["Dark", "Light"], command=change_theme, width=90).pack()
+    
+    # --- שעון גדול וגבוה יותר ---
+    global clock_label
+    # הגדלנו את ה-font ל-22 ואת ה-pady ל-30 כדי שיהיה גבוה יותר
+    clock_label = ctk.CTkLabel(
+        root, 
+        text="", 
+        font=("Courier New", 22, "bold"), 
+        text_color="#3498db" # הוספנו צבע כחול עדין לשעון
+    )
+    clock_label.pack(side="bottom", pady=30) 
+    update_clock()
 
 # --- Security ---
 def forgot_pin():
@@ -50,16 +71,15 @@ def view_logs(aid):
     log_data = f"--- Audit Logs for {user.name} (#{aid}) ---\n"
     log_data += "-"*60 + "\n"
     for t in reversed(user.transactions):
-        # כאן הוספנו את ה-source לאדמין
         log_data += f"{t['date']} | {t['type']:<12} | ${t['amount']:<8} | {t.get('source', 'N/A')}\n"
     txt.insert("0.0", log_data); txt.configure(state="disabled")
 
 # --- UI Screens ---
 def login_screen():
     clear()
-    ctk.CTkLabel(root, text="DevOps Bank", font=("Arial", 40, "bold")).pack(pady=50)
-    acc_e = ctk.CTkEntry(root, placeholder_text="Account #"); acc_e.pack(pady=10)
-    pin_e = ctk.CTkEntry(root, placeholder_text="PIN", show="*"); pin_e.pack(pady=10)
+    ctk.CTkLabel(root, text="Hello World Bank", font=("Arial", 45, "bold")).pack(pady=50)
+    acc_e = ctk.CTkEntry(root, placeholder_text="Account #", width=250, height=35); acc_e.pack(pady=10)
+    pin_e = ctk.CTkEntry(root, placeholder_text="PIN", show="*", width=250, height=35); pin_e.pack(pady=10)
     err_l = ctk.CTkLabel(root, text=""); err_l.pack()
     def do_login():
         global current_user
@@ -68,16 +88,16 @@ def login_screen():
             if s: current_user = r; main_screen()
             else: err_l.configure(text=r, text_color="red")
         except: err_l.configure(text="Numbers only!", text_color="red")
-    ctk.CTkButton(root, text="Login", command=do_login).pack(pady=10)
+    ctk.CTkButton(root, text="Login", command=do_login, width=200, height=40).pack(pady=10)
     ctk.CTkButton(root, text="Forgot PIN?", fg_color="transparent", command=forgot_pin).pack()
 
 def main_screen():
     clear()
     color = "#c0392b" if current_user.is_admin else "#2c3e50"
-    header = ctk.CTkFrame(root, height=100, fg_color=color); header.pack(fill="x")
-    ctk.CTkLabel(header, text=f"Hello, {current_user.name}", font=("Arial", 20)).pack(pady=10)
+    header = ctk.CTkFrame(root, height=120, fg_color=color); header.pack(fill="x")
+    ctk.CTkLabel(header, text=f"Hello, {current_user.name}", font=("Arial", 22, "bold")).pack(pady=10)
     global bal_l
-    bal_l = ctk.CTkLabel(header, text=f"Balance: ${current_user.balance:,.2f}", font=("Arial", 18, "bold")); bal_l.pack()
+    bal_l = ctk.CTkLabel(header, text=f"Balance: ${current_user.balance:,.2f}", font=("Arial", 20, "bold")); bal_l.pack()
 
     if current_user.is_admin:
         tabs = ctk.CTkTabview(root); tabs.pack(fill="both", expand=True, padx=20, pady=10)
@@ -91,15 +111,15 @@ def main_screen():
 
 def setup_personal(frame):
     global dyn_f, info_l
-    ctk.CTkLabel(frame, text="Quick Actions", font=("Arial", 16, "bold")).pack(pady=10)
+    ctk.CTkLabel(frame, text="Quick Actions", font=("Arial", 18, "bold")).pack(pady=10)
     box = ctk.CTkFrame(frame, fg_color="transparent"); box.pack()
-    ctk.CTkButton(box, text="Withdraw", width=90, command=lambda: show_act("W")).grid(row=0, column=0, padx=2)
-    ctk.CTkButton(box, text="Deposit", width=90, command=lambda: show_act("D")).grid(row=0, column=1, padx=2)
-    ctk.CTkButton(box, text="Transfer", width=90, command=lambda: show_act("T")).grid(row=0, column=2, padx=2)
-    ctk.CTkButton(box, text="History", width=90, command=show_my_history).grid(row=0, column=3, padx=2)
+    ctk.CTkButton(box, text="Withdraw", width=100, command=lambda: show_act("W")).grid(row=0, column=0, padx=5)
+    ctk.CTkButton(box, text="Deposit", width=100, command=lambda: show_act("D")).grid(row=0, column=1, padx=5)
+    ctk.CTkButton(box, text="Transfer", width=100, command=lambda: show_act("T")).grid(row=0, column=2, padx=5)
+    ctk.CTkButton(box, text="History", width=100, command=show_my_history).grid(row=0, column=3, padx=5)
     
     info_l = ctk.CTkLabel(frame, text=""); info_l.pack()
-    dyn_f = ctk.CTkFrame(frame, height=200, fg_color="#34495e"); dyn_f.pack(fill="both", expand=True, padx=20, pady=10)
+    dyn_f = ctk.CTkFrame(frame, height=250, fg_color="#34495e"); dyn_f.pack(fill="both", expand=True, padx=20, pady=10)
 
 def show_my_history():
     for w in dyn_f.winfo_children(): w.destroy()
@@ -107,7 +127,6 @@ def show_my_history():
     txt.pack(fill="both", expand=True, padx=10, pady=10)
     log_data = "Your Transactions:\n" + "-"*50 + "\n"
     for t in reversed(current_user.transactions):
-        # כאן הוספנו את ה-source למשתמש הרגיל
         log_data += f"{t['date']} | {t['type']:<12} | ${t['amount']:<7} | {t.get('source', 'ATM')}\n"
     txt.insert("0.0", log_data)
     txt.configure(state="disabled")

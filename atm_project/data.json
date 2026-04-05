@@ -3,7 +3,7 @@
         "account_number": 1001,
         "name": "Admin Eli",
         "pin": "1234",
-        "balance": 54400.0,
+        "balance": 42418.0,
         "blocked": false,
         "is_admin": true,
         "transactions": [
@@ -36,6 +36,18 @@
                 "amount": 50000.0,
                 "source": "ATM",
                 "date": "2026-04-05 15:54"
+            },
+            {
+                "type": "Transfer In",
+                "amount": 18.0,
+                "source": "From GEVA #1007",
+                "date": "2026-04-05 19:23"
+            },
+            {
+                "type": "Withdraw",
+                "amount": 12000.0,
+                "source": "ATM",
+                "date": "2026-04-05 19:23"
             }
         ]
     },
@@ -187,6 +199,22 @@
                 "amount": 100000.0,
                 "source": "To Admin Eli #1001",
                 "date": "2026-04-05 14:19"
+            }
+        ]
+    },
+    "1007": {
+        "account_number": 1007,
+        "name": "GEVA",
+        "pin": "6767",
+        "balance": 482.0,
+        "blocked": false,
+        "is_admin": false,
+        "transactions": [
+            {
+                "type": "Transfer Out",
+                "amount": 18.0,
+                "source": "To Admin Eli #1001",
+                "date": "2026-04-05 19:23"
             }
         ]
     }
