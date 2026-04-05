@@ -1,45 +1,156 @@
 {
     "1001": {
         "account_number": 1001,
-        "name": "Eli",
-        "pin": "1111",
-        "balance": 500,
+        "name": "Admin Eli",
+        "pin": "1234",
+        "balance": 104900.0,
         "blocked": false,
-        "transactions": []
+        "is_admin": true,
+        "transactions": [
+            {
+                "type": "Deposit",
+                "amount": 5000.0,
+                "source": "ATM",
+                "date": "2026-04-05 10:00"
+            },
+            {
+                "type": "Withdraw",
+                "amount": 100.0,
+                "source": "ATM",
+                "date": "2026-04-05 13:34"
+            },
+            {
+                "type": "Transfer In",
+                "amount": 100000.0,
+                "source": "From ben #1006",
+                "date": "2026-04-05 14:19"
+            }
+        ]
     },
     "1002": {
         "account_number": 1002,
-        "name": "Eli",
-        "pin": "1111",
-        "balance": 350,
+        "name": "Yossi Cohen",
+        "pin": "5555",
+        "balance": 200.5,
         "blocked": false,
+        "is_admin": false,
         "transactions": [
             {
-                "type": "Withdraw",
-                "amount": 150,
-                "source": null,
-                "date": "2026-04-04 15:07"
+                "type": "Deposit",
+                "amount": 1200.5,
+                "source": "ATM",
+                "date": "2026-04-05 11:30"
+            },
+            {
+                "type": "Transfer In",
+                "amount": 50.0,
+                "source": "From Dana Levi #1003",
+                "date": "2026-04-05 13:30"
             },
             {
                 "type": "Transfer Out",
-                "amount": 150,
-                "source": "To Yossi",
-                "date": "2026-04-04 15:07"
+                "amount": 100.0,
+                "source": "To Dana Levi #1003",
+                "date": "2026-04-05 13:38"
+            },
+            {
+                "type": "Transfer Out",
+                "amount": 250.0,
+                "source": "To michel #1004",
+                "date": "2026-04-05 13:40"
+            },
+            {
+                "type": "Withdraw",
+                "amount": 500.0,
+                "source": "ATM",
+                "date": "2026-04-05 13:54"
+            },
+            {
+                "type": "Transfer Out",
+                "amount": 200.0,
+                "source": "To Dana Levi #1003",
+                "date": "2026-04-05 14:14"
             }
         ]
     },
     "1003": {
         "account_number": 1003,
-        "name": "Yossi",
+        "name": "Dana Levi",
         "pin": "2222",
-        "balance": 250,
-        "blocked": false,
+        "balance": 1600.0,
+        "blocked": true,
+        "is_admin": false,
         "transactions": [
             {
-                "type": "trasfer_in",
-                "amount": 150,
-                "source": "From Eli (1002",
-                "date": "2026-04-04 15:07"
+                "type": "Withdraw",
+                "amount": 50.0,
+                "source": "ATM",
+                "date": "2026-04-04 09:15"
+            },
+            {
+                "type": "Deposit",
+                "amount": 1000.0,
+                "source": "ATM",
+                "date": "2026-04-05 13:30"
+            },
+            {
+                "type": "Transfer Out",
+                "amount": 50.0,
+                "source": "To Yossi Cohen #1002",
+                "date": "2026-04-05 13:30"
+            },
+            {
+                "type": "Transfer In",
+                "amount": 100.0,
+                "source": "From Yossi Cohen #1002",
+                "date": "2026-04-05 13:38"
+            },
+            {
+                "type": "Transfer In",
+                "amount": 200.0,
+                "source": "From Yossi Cohen #1002",
+                "date": "2026-04-05 14:14"
+            }
+        ]
+    },
+    "1004": {
+        "account_number": 1004,
+        "name": "michel",
+        "pin": "8585",
+        "balance": 850.0,
+        "blocked": false,
+        "is_admin": false,
+        "transactions": [
+            {
+                "type": "Transfer In",
+                "amount": 250.0,
+                "source": "From Yossi Cohen #1002",
+                "date": "2026-04-05 13:40"
+            }
+        ]
+    },
+    "1005": {
+        "account_number": 1005,
+        "name": "king",
+        "pin": "1234",
+        "balance": 1999.0,
+        "blocked": false,
+        "is_admin": false,
+        "transactions": []
+    },
+    "1006": {
+        "account_number": 1006,
+        "name": "ben",
+        "pin": "1379",
+        "balance": 900000.0,
+        "blocked": false,
+        "is_admin": false,
+        "transactions": [
+            {
+                "type": "Transfer Out",
+                "amount": 100000.0,
+                "source": "To Admin Eli #1001",
+                "date": "2026-04-05 14:19"
             }
         ]
     }
