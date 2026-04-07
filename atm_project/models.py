@@ -112,7 +112,7 @@ class Bank:
     def reset_pin_with_security_answer(self, account_number, answer, new_pin):
         acc = self.accounts.get(account_number)
         if not acc: return False, "Account Not Found"
-        if answer.strip().lower() in ["lirone-fitoussi"]:
+        if answer.strip().lower() in ["lirone_fitoussi"]:
             acc.pin = new_pin
             self.save_data()
             return True, "PIN Reset Success"

@@ -54,7 +54,7 @@
     "1002": {
         "account_number": 1002,
         "name": "Yossi Cohen",
-        "pin": "5555",
+        "pin": "4321",
         "balance": 250.5,
         "blocked": false,
         "is_admin": false,
