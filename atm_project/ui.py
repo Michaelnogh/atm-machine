@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from tkinter import messagebox
-from models import Bank, Account
+from models import Bank, Account # the logic
 import time
 
 class ATMApp:
@@ -16,17 +16,17 @@ class ATMApp:
 
         self.login_screen()
 
-    # --- פונקציית השעון המעודכנת ---
+    
     def update_clock(self):
         now = time.strftime("%H:%M:%S  |  %d/%m/%Y")
         if hasattr(self, 'clock_label'):
             self.clock_label.configure(text=now)
-        self.root.after(1000, self.update_clock)
+        self.root.after(1000, self.update_clock) # 1000milisec = 1 sec
 
-    def clear(self):
+    def clear(self): #to change the screen from a to b
         for w in self.root.winfo_children(): 
-            w.destroy()
-        
+            w.destroy() # removing button,txt
+           
         f = ctk.CTkFrame(self.root, fg_color="transparent")
         f.pack(side="top", anchor="ne", padx=10, pady=5)
         ctk.CTkOptionMenu(f, values=["Dark", "Light"], command=ctk.set_appearance_mode, width=90).pack()
@@ -52,7 +52,7 @@ class ATMApp:
         
         def do_reset():
             try:
-                # שימוש ב-self.bank במקום my_bank
+                #checking the bank to see if the secret answer correct
                 s, m = self.bank.reset_pin_with_security_answer(int(acc_e.get()), ans_e.get(), pin_e.get())
                 res_l.configure(text=m, text_color="green" if s else "red")
             except: 
@@ -85,11 +85,11 @@ class ATMApp:
         pin_e = ctk.CTkEntry(self.root, placeholder_text="PIN", show="*", width=250, height=35); pin_e.pack(pady=10)
         err_l = ctk.CTkLabel(self.root, text=""); err_l.pack()
         
-        def do_login():
+        def do_login(): # login logic (*)
             try:
                 s, r = self.bank.user_login(int(acc_e.get()), pin_e.get())
                 if s: 
-                    self.current_user = r
+                    self.current_user = r # saveing the current user
                     self.main_screen()
                 else: 
                     err_l.configure(text=r, text_color="red")
@@ -100,7 +100,7 @@ class ATMApp:
         ctk.CTkButton(self.root, text="Forgot PIN?", fg_color="transparent", command=self.forgot_pin).pack()
 
     def main_screen(self):
-        self.clear()
+        self.clear() # im ho admin - red , im ho user - light blue
         color = "#c0392b" if self.current_user.is_admin else "#2c3e50"
         header = ctk.CTkFrame(self.root, height=120, fg_color=color); header.pack(fill="x")
         ctk.CTkLabel(header, text=f"Hello, {self.current_user.name}", font=("Arial", 22, "bold")).pack(pady=10)
@@ -108,12 +108,12 @@ class ATMApp:
         self.bal_l = ctk.CTkLabel(header, text=f"Balance: ${self.current_user.balance:,.2f}", font=("Arial", 20, "bold"))
         self.bal_l.pack()
 
-        if self.current_user.is_admin:
+        if self.current_user.is_admin: # im ho admin 
             tabs = ctk.CTkTabview(self.root); tabs.pack(fill="both", expand=True, padx=20, pady=10)
             self.setup_personal(tabs.add("My Account"))
             self.setup_manage(tabs.add("Manage Users"))
             self.setup_create(tabs.add("New Account"))
-        else:
+        else: #Im ho user
             f = ctk.CTkFrame(self.root, fg_color="transparent"); f.pack(fill="both", expand=True)
             self.setup_personal(f)
         
