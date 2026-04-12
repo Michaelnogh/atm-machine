@@ -2,6 +2,7 @@ import customtkinter as ctk
 from tkinter import messagebox
 from models import Bank, Account # the logic
 import time
+import os
 
 class ATMApp:
     def __init__(self, root, bank):

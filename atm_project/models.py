@@ -69,12 +69,12 @@ class Bank:
         self.accounts = {}
         self.data_file = "data.json"
         self.load_data()
-
+ #srialization
     def save_data(self): # saving the progress to jsonfile making every obj to dict to for saveing 
         data_to_save = {str(k): v.to_dict() for k, v in self.accounts.items()} # checking every acc and every (V) acc mavira oto le dict
         with open(self.data_file, 'w') as f:
             json.dump(data_to_save, f, indent=4)
-
+#deserialaziation
     def load_data(self): # reading the json file , and putting the acc list in 
         if not os.path.exists(self.data_file): return # bodek in yesh json at first to prevent crashing
         try:

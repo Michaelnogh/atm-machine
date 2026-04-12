@@ -55,7 +55,7 @@
         "account_number": 1002,
         "name": "Yossi Cohen",
         "pin": "4321",
-        "balance": 250.5,
+        "balance": 600.5,
         "blocked": false,
         "is_admin": false,
         "transactions": [
@@ -100,6 +100,12 @@
                 "amount": 50.0,
                 "source": "From michel #1004",
                 "date": "2026-04-05 15:47"
+            },
+            {
+                "type": "Transfer In",
+                "amount": 350.0,
+                "source": "From michel #1004",
+                "date": "2026-04-09 15:02"
             }
         ]
     },
@@ -146,8 +152,8 @@
     "1004": {
         "account_number": 1004,
         "name": "michel",
-        "pin": "8585",
-        "balance": 800.0,
+        "pin": "123",
+        "balance": 550.0,
         "blocked": false,
         "is_admin": false,
         "transactions": [
@@ -174,6 +180,24 @@
                 "amount": 50.0,
                 "source": "To Yossi Cohen #1002",
                 "date": "2026-04-05 15:47"
+            },
+            {
+                "type": "Withdraw",
+                "amount": 150.0,
+                "source": "ATM",
+                "date": "2026-04-09 15:02"
+            },
+            {
+                "type": "Deposit",
+                "amount": 250.0,
+                "source": "ATM",
+                "date": "2026-04-09 15:02"
+            },
+            {
+                "type": "Transfer Out",
+                "amount": 350.0,
+                "source": "To Yossi Cohen #1002",
+                "date": "2026-04-09 15:02"
             }
         ]
     },
